@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+    csvserver:
+        volumes:
+            - '$PWD/inputFile:/csvserver/inputdata'
+        environment:
+            - CSVSERVER_BORDER=orange
+        ports:
+            - '9393:9300'
+        image: 'infracloudio/csvserver:latest'
+    prometheus:
+        ports:
+            - '9090:9090'
+        image: 'prom/prometheus:v2.22.0'
+        links:
+            - 'csvserver:csvserver'
+        depends_on:
+            - 'csvserver'
