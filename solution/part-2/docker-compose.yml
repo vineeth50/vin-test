@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+    csvserver:
+        volumes:
+            - '$PWD/inputFile:/csvserver/inputdata'
+        env_file:
+            - ./csvserver.env
+        ports:
+            - '9393:9300'
+        image: 'infracloudio/csvserver:latest'
+
